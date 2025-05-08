@@ -50,7 +50,11 @@ function generateModulesSet() {
         throw new Error('Invalid options passed');
       }
 
-      return addTransactionalDataSource(new DataSource(options));
+      const dataSource = new DataSource(options);
+      if (!dataSource.isInitialized) {
+        await dataSource.initialize();
+      }
+      return addTransactionalDataSource(dataSource);
     },
   });
 

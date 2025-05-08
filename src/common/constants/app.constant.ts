@@ -48,6 +48,7 @@ export enum ResourceList {
   USER = 'user',
   ROLE = 'role',
   PERMISSION = 'permission',
+  CV = 'cv'
 }
 
 export enum ActionList {

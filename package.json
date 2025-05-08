@@ -32,10 +32,11 @@
     "db:drop": "env-cmd ts-node ./node_modules/typeorm-extension/bin/cli.cjs db:drop -d src/database/data-source.ts",
     "seed:run": "env-cmd ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d src/database/data-source.ts",
     "seed:run-explicit": "env-cmd ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d src/database/data-source.ts --name src/database/seeds/$npm_config_name",
-    "seed:create": "env-cmd ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:create --name src/database/seeds/user-seeder",
+    "seed:create": "env-cmd ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:create --name src/database/seeds/cv-seeder",
     "prepare": "husky || true"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@nestjs-modules/mailer": "^2.0.2",
     "@nestjs/axios": "^3.0.3",
     "@nestjs/cache-manager": "^2.2.2",

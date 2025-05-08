@@ -5,6 +5,8 @@ import { PermissionModule } from '@modules/permission/permission.module';
 import { RoleModule } from '@modules/role/role.module';
 import { SessionModule } from '@modules/session/session.module';
 import { UserModule } from '@modules/user/user.module';
+import { CvModule } from './modules/cv/cv.module';
+import { GeminiModule } from './modules/gemini/gemini.module';
 import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import generateModulesSet from '@shared/modules-set';
@@ -24,6 +26,8 @@ const modulesGenerate = generateModulesSet();
     PermissionModule,
     SharedModule,
     FileModule,
+    CvModule,
+    GeminiModule,
   ],
 })
 export class AppModule {}

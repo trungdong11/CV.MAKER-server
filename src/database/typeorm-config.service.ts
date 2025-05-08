@@ -3,6 +3,22 @@ import { AllConfigType } from '@config/config.type';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { CV } from '@modules/cv/entities/cv.entity';
+import { PersonalDetails } from '@modules/cv/entities/personal-details.entity';
+import { Social } from '@modules/cv/entities/social.entity';
+import { Education } from '@modules/cv/entities/education.entity';
+import { Award } from '@modules/cv/entities/award.entity';
+import { Language } from '@modules/cv/entities/language.entity';
+import { Skill } from '@modules/cv/entities/skill.entity';
+import { Work } from '@modules/cv/entities/work.entity';
+import { Project } from '@modules/cv/entities/project.entity';
+import { Certification } from '@modules/cv/entities/certification.entity';
+import { Publication } from '@modules/cv/entities/publication.entity';
+import { Organization } from '@modules/cv/entities/organization.entity';
+import { UserEntity } from '@modules/user/entities/user.entity';
+import { PermissionEntity } from '@modules/permission/entities/permission.entity';
+import { SessionEntity } from '@modules/session/entities/session.entity';
+import { RoleEntity } from '@modules/role/entities/role.entity';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -27,10 +43,27 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
           ? ['error', 'warn', 'query', 'schema']
           : ['error', 'warn'],
       ),
-      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+      entities: [
+        CV,
+        PersonalDetails,
+        Social,
+        Education,
+        Award,
+        Language,
+        Skill,
+        Work,
+        Project,
+        Certification,
+        Publication,
+        Organization,
+        UserEntity,
+        PermissionEntity,
+        SessionEntity,
+        RoleEntity
+      ],
       migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
       migrationsTableName: 'migrations',
-      autoLoadEntities: true,
+      autoLoadEntities: false,
       poolSize: this.configService.get('database.maxConnections', {
         infer: true,
       }),
