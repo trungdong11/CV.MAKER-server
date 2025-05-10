@@ -7,8 +7,8 @@
       "server": "localhost",
       "port": 25432,
       "driver": "PostgreSQL",
-      "name": "nestjs_boilerplate",
-      "database": "nestjs_boilerplate",
+      "name": "cv_maker",
+      "database": "cv_maker",
       "username": "postgres",
       "password": "postgres"
     }

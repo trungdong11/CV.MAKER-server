@@ -7,9 +7,9 @@ export class LoginReqDto {
   email!: string;
 
   @PasswordField()
-  @Matches(PASSWORD_FORMAT, {
-    message:
-      'Password must contain only letters, numbers, and at least one special character (!@#$%^&*(),.?":{}|<>)',
-  })
+  // @Matches(PASSWORD_FORMAT, {
+  //   message:
+  //     'Password must contain only letters, numbers, and at least one special character (!@#$%^&*(),.?":{}|<>)',
+  // })
   password!: string;
 }

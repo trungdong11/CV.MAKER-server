@@ -34,7 +34,7 @@ This error occurs when the environment variables are not set correctly. Ensure t
   ```bash
   ❯ npm start
 
-  > nestjs-boilerplate@0.0.1 start /Users/lamngockhuong/develop/projects/vndevteam/nestjs-boilerplate
+  > cv-maker@0.0.1 start /Users/lamngockhuong/develop/projects/vndevteam/cv-maker
   > nest start
 
   ✔  TSC  Initializing type checker...

@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:16
-    container_name: nest_boilerplate-postgres
+    container_name: cv_maker-postgres
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -15,7 +15,7 @@ services:
     ports:
       - '25432:5432'
     networks:
-      - nest_boilerplate-network
+      - cv_maker-network
 
   redis:
     image: redis:latest
@@ -31,7 +31,7 @@ services:
     volumes:
       - redis_data:/data
     networks:
-      - nest_boilerplate-network
+      - cv_maker-network
 
   maildev:
     build:
@@ -41,11 +41,11 @@ services:
       - ${MAIL_CLIENT_PORT}:1080
       - ${MAIL_PORT}:1025
     networks:
-      - nest_boilerplate-network
+      - cv_maker-network
 
-  nest_boilerplate-api:
-    image: nest_boilerplate-api
-    container_name: nest_boilerplate-api
+  cv_maker-api:
+    image: cv_maker-api
+    container_name: cv_maker-api
     restart: unless-stopped
     build:
       context: .
@@ -58,12 +58,12 @@ services:
       - db
       - redis
     networks:
-      - nest_boilerplate-network
+      - cv_maker-network
 
 volumes:
   postgres_data:
   redis_data:
 
 networks:
-  nest_boilerplate-network:
+  cv_maker-network:
     driver: bridge
