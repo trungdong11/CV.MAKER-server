@@ -17,7 +17,7 @@ jobs:
           username: ${{ secrets.CLOUD_USERNAME }}
           password: ${{ secrets.CLOUD_PASSWORD }}
           script: |
-            cd CVMaker-server
+            cd CV.MAKER-server
             docker-compose down
             git pull origin main
             docker-compose up --build -d
