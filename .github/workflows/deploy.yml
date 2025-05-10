@@ -15,7 +15,7 @@ jobs:
         with:
           host: ${{ secrets.CLOUD_HOST }}
           username: ${{ secrets.CLOUD_USERNAME }}
-          password: ${{ secrets.CLOUD_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd CV.MAKER-server
             docker-compose down
