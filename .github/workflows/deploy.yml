@@ -17,8 +17,7 @@ jobs:
           username: ${{ secrets.CLOUD_USERNAME }}
           password: ${{ secrets.CLOUD_PASSWORD }}
           script: |
-            cd chat-ebook
-            cd chat-ebook-server
+            cd CVMaker-server
             docker-compose down
             git pull origin main
             docker-compose up --build -d
