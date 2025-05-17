@@ -12,24 +12,9 @@ import { DataSource } from 'typeorm';
 @Injectable()
 export class CvService {
   private readonly sensitiveFields = [
-    'phoneNumber',
-    'email',
-    'address',
-    'awardTitleLink',
-    'projectLink',
-    'certificationLink',
-    'credentialId',
-    'url',
-    'issuedby',
-    'summary',
-    'degree',
-    'GPA',
-    'name',
-    'fullname',
-    'avatar',
-    'link',
-    'companyName',
-    'location',
+    'phone_number', 'email', 'address', 'award_title_link', 'project_link',
+    'certification_link', 'credential_id', 'url', 'issued_by', 'summary',
+    'degree', 'name', 'fullname', 'avatar', 'link', 'company_name', 'location',
   ];
 
   private readonly cvRepository: CvRepository;
@@ -44,38 +29,32 @@ export class CvService {
   private formatDate(dateStr: string): Date {
     if (!dateStr) return null;
     const date = new Date(dateStr);
-    if (isNaN(date.getTime())) {
-      console.warn(`Invalid date string: ${dateStr}`);
-      return null;
-    }
-    return date;
+    return isNaN(date.getTime()) ? null : date;
   }
 
   private formatDatesInObject(obj: any): any {
     if (!obj) return obj;
-    
+
     const formattedObj = { ...obj };
-    
-    // Format dates in personalDetails
-    if (obj.personalDetails) {
-      formattedObj.personalDetails = {
-        ...obj.personalDetails,
-        birthday: this.formatDate(obj.personalDetails.birthday)
+
+    if (obj.personal_details) {
+      formattedObj.personal_details = {
+        ...obj.personal_details,
+        birthday: this.formatDate(obj.personal_details.birthday),
       };
     }
 
-    // Format dates in arrays
     const arrayFields = ['education', 'award', 'works', 'projects', 'certification', 'publication', 'organization'];
     for (const field of arrayFields) {
       if (Array.isArray(obj[field])) {
         formattedObj[field] = obj[field].map(item => {
           const formattedItem = { ...item };
           const dateFields = ['startDate', 'endDate', 'issuedDate', 'publicationDate'];
-          dateFields.forEach(dateField => {
+          for (const dateField of dateFields) {
             if (item[dateField]) {
               formattedItem[dateField] = this.formatDate(item[dateField]);
             }
-          });
+          }
           return formattedItem;
         });
       }
@@ -86,22 +65,22 @@ export class CvService {
 
   private encryptNestedObject(obj: any): any {
     if (!obj) return obj;
-    
+
     const encryptedObj = { ...obj };
-    
-    // Mã hóa các trường nhạy cảm ở cấp độ hiện tại
+
     for (const field of this.sensitiveFields) {
-      if (obj[field] && typeof obj[field] === 'string') {
-        encryptedObj[field] = this.encryptionService.encrypt(obj[field]);
+      if (obj[field] !== undefined && obj[field] !== null) {
+        const value = obj[field];
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+          encryptedObj[field] = this.encryptionService.encrypt(String(value));
+        }
       }
     }
 
-    // Mã hóa các trường trong personalDetails
-    if (obj.personalDetails) {
-      encryptedObj.personalDetails = this.encryptNestedObject(obj.personalDetails);
+    if (obj.personal_details) {
+      encryptedObj.personal_details = this.encryptNestedObject(obj.personal_details);
     }
 
-    // Mã hóa các mảng
     const arrayFields = ['socials', 'education', 'award', 'languages', 'skills', 'works', 'projects', 'certification', 'publication', 'organization'];
     for (const field of arrayFields) {
       if (Array.isArray(obj[field])) {
@@ -114,10 +93,9 @@ export class CvService {
 
   private decryptNestedObject(obj: any): any {
     if (!obj) return obj;
-    
+
     const decryptedObj = { ...obj };
-    
-    // Giải mã các trường nhạy cảm ở cấp độ hiện tại
+
     for (const field of this.sensitiveFields) {
       if (obj[field] && typeof obj[field] === 'string') {
         try {
@@ -129,12 +107,10 @@ export class CvService {
       }
     }
 
-    // Giải mã các trường trong personalDetails
-    if (obj.personalDetails) {
-      decryptedObj.personalDetails = this.decryptNestedObject(obj.personalDetails);
+    if (obj.personal_details) {
+      decryptedObj.personal_details = this.decryptNestedObject(obj.personal_details);
     }
 
-    // Giải mã các mảng
     const arrayFields = ['socials', 'education', 'award', 'languages', 'skills', 'works', 'projects', 'certification', 'publication', 'organization'];
     for (const field of arrayFields) {
       if (Array.isArray(obj[field])) {
@@ -146,43 +122,33 @@ export class CvService {
   }
 
   async create(createCvDto: CreateCvReqDto, userId: Uuid): Promise<CvResDto> {
-    
     const now = new Date();
-    
-    // Format all dates in the object
     const formattedData = this.formatDatesInObject({
       ...createCvDto,
-      createdAt: now,
-      updatedAt: now
+      created_at: now,
+      updated_at: now,
     });
-    
 
-    // Mã hóa dữ liệu nhạy cảm trước khi lưu
     const encryptedData = this.encryptNestedObject({
       ...formattedData,
       userId,
     });
-    
 
-    const cv = this.cvRepository.create(encryptedData);
+    const cv = this.cvRepository.create({
+      ...encryptedData,
+      user: { id: userId } as any,
+    });
+
     const savedCv = await this.cvRepository.save(cv);
-    
-
-    // Giải mã dữ liệu trước khi trả về
     const decryptedCv = this.decryptNestedObject(savedCv);
-
     return this.mapToDto(decryptedCv);
   }
 
   async findAll(userId: Uuid): Promise<CvResDto[]> {
     try {
       const cvs = await this.cvRepository.findAllByUserId(userId);
-
-      // Giải mã dữ liệu trước khi trả về
-      const decryptedCvs = cvs.map((cv) => this.decryptNestedObject(cv));
-
-      const mappedCvs = decryptedCvs.map(cv => this.mapToDto(cv));
-      return mappedCvs;
+      const decryptedCvs = cvs.map(cv => this.decryptNestedObject(cv));
+      return decryptedCvs.map(cv => this.mapToDto(cv));
     } catch (error) {
       console.error('Error in findAll:', error);
       throw error;
@@ -195,7 +161,6 @@ export class CvService {
       throw new NotFoundException(`CV with ID ${id} not found or you do not have access to it`);
     }
 
-    // Giải mã dữ liệu trước khi trả về
     const decryptedCv = this.decryptNestedObject(cv);
     return this.mapToDto(decryptedCv);
   }
@@ -206,19 +171,15 @@ export class CvService {
       throw new NotFoundException(`CV with ID ${id} not found or you do not have access to it`);
     }
 
-    // Format all dates in the object
     const formattedData = this.formatDatesInObject({
       ...updateCvDto,
-      updatedAt: new Date()
+      updated_at: new Date(),
     });
 
-    // Mã hóa dữ liệu nhạy cảm trước khi cập nhật
     const encryptedData = this.encryptNestedObject(formattedData);
     Object.assign(cv, encryptedData);
-    
-    const updatedCv = await this.cvRepository.save(cv);
 
-    // Giải mã dữ liệu trước khi trả về
+    const updatedCv = await this.cvRepository.save(cv);
     const decryptedCv = this.decryptNestedObject(updatedCv);
     return this.mapToDto(decryptedCv);
   }
@@ -233,11 +194,10 @@ export class CvService {
 
   private mapToDto(cv: CV): CvResDto {
     try {
-      const dto = plainToClass(CvResDto, cv, { 
+      return plainToClass(CvResDto, cv, {
         excludeExtraneousValues: true,
-        enableImplicitConversion: true 
+        enableImplicitConversion: true,
       });
-      return dto;
     } catch (error) {
       console.error('Error in mapToDto:', error);
       throw error;

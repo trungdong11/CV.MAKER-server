@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, Relation } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Relation } from 'typeorm';
 import { CV } from './cv.entity';
 
 @Entity('skill')
@@ -6,12 +6,13 @@ export class Skill {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
-    skillCategory: string;
+    @Column({ name: 'skill_category' })
+    skill_category: string;
 
-    @Column()
-    ListOfSkill: string;
+    @Column({ name: 'list_of_skill' })
+    list_of_skill: string;
 
-    @ManyToOne(() => CV, (cv) => cv.skills, { onDelete: 'CASCADE' })
-    cv: Relation<CV>;
+    @ManyToOne(() => CV, (cv) => cv.skills)
+    @JoinColumn({ name: 'cv_id' })
+    cv?: Relation<CV>;
 }

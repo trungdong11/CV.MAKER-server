@@ -2,10 +2,10 @@ import { IsString, IsBoolean, IsDateString, IsOptional, IsArray, IsEmail, IsNumb
 
 export class CreatePersonalDetailsDto {
     @IsString()
-    fullname: string;
+    full_name: string;
 
     @IsString()
-    phoneNumber: string;
+    phone_number: string;
 
     @IsString()
     address: string;
@@ -20,7 +20,7 @@ export class CreatePersonalDetailsDto {
     avatar: string;
 
     @IsString()
-    jobTitle: string;
+    job_title: string;
 }
 
 export class CreateSocialDto {
@@ -39,13 +39,13 @@ export class CreateEducationDto {
     school: string;
 
     @IsDateString()
-    startDate: string;
+    start_date: string;
 
     @IsDateString()
-    endDate: string;
+    end_date: string;
 
     @IsString()
-    schoolLink: string;
+    school_link: string;
 
     @IsString()
     city: string;
@@ -59,16 +59,16 @@ export class CreateEducationDto {
 
 export class CreateAwardDto {
     @IsString()
-    awardTitle: string;
+    award_title: string;
 
     @IsString()
-    awardTitleLink: string;
+    award_title_link: string;
 
     @IsString()
-    issuedBy: string;
+    issued_by: string;
 
-    @IsString()
-    issuedDate: string;
+    @IsDateString()
+    issued_date: string;
 
     @IsString()
     description: string;
@@ -84,18 +84,18 @@ export class CreateLanguageDto {
 
 export class CreateSkillDto {
     @IsString()
-    skillCategory: string;
+    skill_category: string;
 
     @IsString()
-    listOfSkill: string;
+    list_of_skill: string;
 }
 
 export class CreateWorkDto {
     @IsString()
-    companyName: string;
+    company_name: string;
 
     @IsBoolean()
-    isCurrentWorking: boolean;
+    is_current_working: boolean;
 
     @IsString()
     position: string;
@@ -104,10 +104,10 @@ export class CreateWorkDto {
     location: string;
 
     @IsDateString()
-    startDate: string;
+    start_date: string;
 
     @IsDateString()
-    endDate: string;
+    end_date: string;
 
     @IsString()
     description: string;
@@ -115,17 +115,20 @@ export class CreateWorkDto {
 
 export class CreateProjectDto {
     @IsString()
-    projectName: string;
+    project_name: string;
 
     @IsString()
-    projectLink: string;
+    project_link: string;
 
     @IsDateString()
-    startDate: string;
+    start_date: string;
 
     @IsDateString()
     @IsOptional()
-    endDate: string;
+    end_date: string;
+
+    @IsBoolean()
+    is_ongoing: boolean;
 
     @IsString()
     description: string;
@@ -133,19 +136,19 @@ export class CreateProjectDto {
 
 export class CreateCertificationDto {
     @IsString()
-    certificationName: string;
+    certification_name: string;
 
     @IsString()
-    issuingOrganization: string;
+    issuing_organization: string;
 
     @IsDateString()
-    issuedDate: string;
+    issued_date: string;
 
     @IsString()
-    certificationLink: string;
+    certification_link: string;
 
     @IsString()
-    credentialId: string;
+    credential_id: string;
 }
 
 export class CreatePublicationDto {
@@ -158,8 +161,8 @@ export class CreatePublicationDto {
     @IsString()
     url: string;
 
-    @IsString()
-    publicationDate: string;
+    @IsDateString()
+    publication_date: string;
 
     @IsString()
     description: string;
@@ -176,11 +179,10 @@ export class CreateOrganizationDto {
     address: string;
 
     @IsDateString()
-    startDate: string;
+    start_date: string;
 
     @IsDateString()
-    @IsOptional()
-    endDate: string;
+    end_date: string;
 
     @IsString()
     description: string;
@@ -198,7 +200,7 @@ export class CreateCvReqDto {
     summary: string;
 
     @IsOptional()
-    personalDetails?: CreatePersonalDetailsDto;
+    personal_details?: CreatePersonalDetailsDto;
 
     @IsArray()
     @IsOptional()

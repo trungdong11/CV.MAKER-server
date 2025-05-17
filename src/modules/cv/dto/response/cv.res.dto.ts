@@ -1,11 +1,14 @@
 import { Expose, Type } from 'class-transformer';
 
 export class PersonalDetailsResDto {
-    @Expose({ name: 'fullname' })
-    fullname: string;
+    @Expose()
+    id: string;
 
-    @Expose({ name: 'phoneNumber' })
-    phoneNumber: string;
+    @Expose()
+    full_name: string;
+
+    @Expose()
+    phone_number: string;
 
     @Expose()
     address: string;
@@ -13,14 +16,14 @@ export class PersonalDetailsResDto {
     @Expose()
     birthday: string;
 
-    @Expose({ name: 'email' })
+    @Expose()
     email: string;
 
-    @Expose({ name: 'avatar' })
+    @Expose()
     avatar: string;
 
-    @Expose({ name: 'jobTitle' })
-    jobTitle: string;
+    @Expose()
+    job_title: string;
 }
 
 export class SocialResDto {
@@ -44,20 +47,20 @@ export class EducationResDto {
     @Expose()
     school: string;
 
-    @Expose({ name: 'startDate' })
-    startDate: string;
+    @Expose({ name: 'start_date' })
+    start_date: string;
 
-    @Expose({ name: 'endDate' })
-    endDate: string;
+    @Expose({ name: 'end_date' })
+    end_date: string;
 
-    @Expose({ name: 'schoolLink' })
-    schoolLink: string;
+    @Expose({ name: 'school_link' })
+    school_link: string;
 
     @Expose()
     city: string;
 
-    @Expose({ name: 'GPA' })
-    GPA: number;
+    @Expose({ name: 'gpa' })
+    gpa: number;
 
     @Expose()
     description: string;
@@ -67,17 +70,17 @@ export class AwardResDto {
     @Expose()
     id: string;
 
-    @Expose({ name: 'awardTitle' })
-    awardTitle: string;
+    @Expose({ name: 'award_title' })
+    award_title: string;
 
-    @Expose({ name: 'awardTitleLink' })
-    awardTitleLink: string;
+    @Expose({ name: 'award_title_link' })
+    award_title_link: string;
 
-    @Expose({ name: 'issuedBy' })
-    issuedBy: string;
+    @Expose({ name: 'issued_by' })
+    issued_by: string;
 
-    @Expose({ name: 'issuedDate' })
-    issuedDate: string;
+    @Expose({ name: 'issued_date' })
+    issued_date: string;
 
     @Expose()
     description: string;
@@ -98,22 +101,22 @@ export class SkillResDto {
     @Expose()
     id: string;
 
-    @Expose({ name: 'skillCategory' })
-    skillCategory: string;
+    @Expose({ name: 'skill_category' })
+    skill_category: string;
 
-    @Expose({ name: 'listOfSkill' })
-    listOfSkill: string;
+    @Expose({ name: 'list_of_skill' })
+    list_of_skill: string;
 }
 
 export class WorkResDto {
     @Expose()
     id: string;
 
-    @Expose({ name: 'companyName' })
-    companyName: string;
+    @Expose({ name: 'company_name' })
+    company_name: string;
 
-    @Expose({ name: 'isCurrentWorking' })
-    isCurrentWorking: boolean;
+    @Expose({ name: 'is_current_working' })
+    is_current_working: boolean;
 
     @Expose()
     position: string;
@@ -121,11 +124,11 @@ export class WorkResDto {
     @Expose()
     location: string;
 
-    @Expose({ name: 'startDate' })
-    startDate: string;
+    @Expose({ name: 'start_date' })
+    start_date: string;
 
-    @Expose({ name: 'endDate' })
-    endDate: string;
+    @Expose({ name: 'end_date' })
+    end_date: string;
 
     @Expose()
     description: string;
@@ -135,17 +138,20 @@ export class ProjectResDto {
     @Expose()
     id: string;
 
-    @Expose({ name: 'projectName' })
-    projectName: string;
+    @Expose({ name: 'project_name' })
+    project_name: string;
 
-    @Expose({ name: 'projectLink' })
-    projectLink: string;
+    @Expose({ name: 'project_link' })
+    project_link: string;
 
-    @Expose({ name: 'startDate' })
-    startDate: string;
+    @Expose({ name: 'start_date' })
+    start_date: string;
 
-    @Expose({ name: 'endDate' })
-    endDate: string;
+    @Expose({ name: 'end_date' })
+    end_date: string;
+
+    @Expose({ name: 'is_ongoing' })
+    is_ongoing: boolean;
 
     @Expose()
     description: string;
@@ -155,20 +161,20 @@ export class CertificationResDto {
     @Expose()
     id: string;
 
-    @Expose({ name: 'certificationName' })
-    certificationName: string;
+    @Expose({ name: 'certification_name' })
+    certification_name: string;
 
-    @Expose({ name: 'issuingOrganization' })
-    issuingOrganization: string;
+    @Expose({ name: 'issuing_organization' })
+    issuing_organization: string;
 
-    @Expose({ name: 'issuedDate' })
-    issuedDate: string;
+    @Expose({ name: 'issued_date' })
+    issued_date: string;
 
-    @Expose({ name: 'certificationLink' })
-    certificationLink: string;
+    @Expose({ name: 'certification_link' })
+    certification_link: string;
 
-    @Expose({ name: 'credentialId' })
-    credentialId: string;
+    @Expose({ name: 'credential_id' })
+    credential_id: string;
 }
 
 export class PublicationResDto {
@@ -184,8 +190,8 @@ export class PublicationResDto {
     @Expose()
     url: string;
 
-    @Expose({ name: 'publicationDate' })
-    publicationDate: string;
+    @Expose({ name: 'publication_date' })
+    publication_date: string;
 
     @Expose()
     description: string;
@@ -204,11 +210,11 @@ export class OrganizationResDto {
     @Expose()
     address: string;
 
-    @Expose({ name: 'startDate' })
-    startDate: string;  
+    @Expose({ name: 'start_date' })
+    start_date: string;
 
-    @Expose({ name: 'endDate' })
-    endDate: string;
+    @Expose({ name: 'end_date' })
+    end_date: string;
 
     @Expose()
     description: string;
@@ -218,27 +224,18 @@ export class CvResDto {
     @Expose()
     id: string;
 
-    // @Expose()
-    // lngCode: string;
+    @Expose({ name: 'created_at' })
+    created_at: Date;
 
-    // @Expose()
-    // isPremium: boolean;
-
-    @Expose({ name: 'createdAt' })
-    createdAt: Date;
-
-    @Expose({ name: 'updatedAt' })
-    updatedAt: Date;
-
-    // @Expose()
-    // status: string;
+    @Expose({ name: 'updated_at' })
+    updated_at: Date;
 
     @Expose()
     summary: string;
 
     @Expose()
     @Type(() => PersonalDetailsResDto)
-    personalDetails: PersonalDetailsResDto;
+    personal_details: PersonalDetailsResDto;
 
     @Expose()
     @Type(() => SocialResDto)

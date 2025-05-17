@@ -4,6 +4,7 @@ import { hashPassword as hashPass } from '@common/utils/password.util';
 import { AbstractEntity } from '@database/entities/abstract.entity';
 import { PermissionEntity } from '@modules/permission/entities/permission.entity';
 import { RoleEntity } from '@modules/role/entities/role.entity';
+import { CV } from '@/modules/cv/entities/cv.entity';
 import { SessionEntity } from '@modules/session/entities/session.entity';
 import {
   BeforeInsert,
@@ -54,6 +55,10 @@ export class UserEntity extends AbstractEntity {
 
   @Column({ name: 'is_confirmed', type: 'boolean', default: false })
   isConfirmed?: boolean;
+
+  @OneToMany(() => CV, (cv) => cv.user)
+  cvs: CV[];
+
 
   @ManyToMany(() => RoleEntity, (role) => role.users)
   @JoinTable({

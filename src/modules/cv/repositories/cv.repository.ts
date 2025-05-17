@@ -12,7 +12,7 @@ export class CvRepository extends Repository<CV> {
   async findAllByUserId(userId: Uuid): Promise<CV[]> {
     try {
       const queryBuilder = this.createQueryBuilder('cv')
-        .leftJoinAndSelect('cv.personalDetails', 'personalDetails')
+        .leftJoinAndSelect('cv.personal_details', 'personal_details')
         .leftJoinAndSelect('cv.socials', 'socials')
         .leftJoinAndSelect('cv.education', 'education')
         .leftJoinAndSelect('cv.award', 'award')
@@ -23,7 +23,7 @@ export class CvRepository extends Repository<CV> {
         .leftJoinAndSelect('cv.certification', 'certification')
         .leftJoinAndSelect('cv.publication', 'publication')
         .leftJoinAndSelect('cv.organization', 'organization')
-        .where('cv.userId = :userId', { userId });
+        .where('cv.user_id = :userId', { userId });
 
       const cvs = await queryBuilder.getMany();
       return cvs;
@@ -35,7 +35,7 @@ export class CvRepository extends Repository<CV> {
   async findOneByIdAndUserId(id: string, userId: Uuid): Promise<CV> {
     try {
       const queryBuilder = this.createQueryBuilder('cv')
-        .leftJoinAndSelect('cv.personalDetails', 'personalDetails')
+        .leftJoinAndSelect('cv.personal_details', 'personal_details')
         .leftJoinAndSelect('cv.socials', 'socials')
         .leftJoinAndSelect('cv.education', 'education')
         .leftJoinAndSelect('cv.award', 'award')
@@ -47,7 +47,7 @@ export class CvRepository extends Repository<CV> {
         .leftJoinAndSelect('cv.publication', 'publication')
         .leftJoinAndSelect('cv.organization', 'organization')
         .where('cv.id = :id', { id })
-        .andWhere('cv.userId = :userId', { userId });
+        .andWhere('cv.user_id = :userId', { userId });
 
       const cv = await queryBuilder.getOne();
       return cv;

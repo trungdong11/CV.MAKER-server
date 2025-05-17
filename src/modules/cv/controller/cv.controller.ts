@@ -16,7 +16,7 @@ import { CvService } from '../cv.service';
   path: 'cv',
   version: '1',
 })
-@UseGuards(PermissionGuard)
+// @UseGuards(PermissionGuard)
 export class CvController {
   constructor(private readonly cvService: CvService) {}
 

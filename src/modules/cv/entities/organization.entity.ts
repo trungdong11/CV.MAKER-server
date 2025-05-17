@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, Relation } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Relation } from 'typeorm';
 import { CV } from './cv.entity';
 
 @Entity('organization')
@@ -12,15 +12,17 @@ export class Organization {
     @Column()
     position: string;
 
-    @Column()
-    startDate: Date;
 
-    @Column({ nullable: true })
-    endDate: Date;
+    @Column({ name: 'start_date' })
+    start_date: Date;
+
+    @Column({ name: 'end_date' })
+    end_date: Date;
 
     @Column()
     description: string;
 
-    @ManyToOne(() => CV, (cv) => cv.organization, { onDelete: 'CASCADE' })
-    cv: Relation<CV>;
+    @ManyToOne(() => CV, (cv) => cv.organization)
+    @JoinColumn({ name: 'cv_id' })
+    cv?: Relation<CV>;
 }
