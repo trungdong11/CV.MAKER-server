@@ -6,11 +6,11 @@ export class PersonalDetails {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
-    fullname: string;
+    @Column({ name: 'full_name' })
+    full_name: string;
 
-    @Column()
-    phoneNumber: string;
+    @Column({ name: 'phone_number' })
+    phone_number: string;
 
     @Column()
     address: string;
@@ -24,10 +24,10 @@ export class PersonalDetails {
     @Column()
     avatar: string;
 
-    @Column()
-    jobTitle: string;
+    @Column({ name: 'job_title' })
+    job_title: string;
 
-    @OneToOne(() => CV, (cv) => cv.personalDetails, { nullable: true })
-    @JoinColumn({ name: 'cvId' })
+    @OneToOne(() => CV, (cv) => cv.personal_details, { nullable: true })
+    @JoinColumn({ name: 'cv_id' })
     cv?: Relation<CV>;
 }

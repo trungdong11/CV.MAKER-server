@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, Relation } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Relation } from 'typeorm';
 import { CV } from './cv.entity';
 
 @Entity('language')
@@ -12,6 +12,7 @@ export class Language {
     @Column()
     proficiency: string;
 
-    @ManyToOne(() => CV, (cv) => cv.languages, { onDelete: 'CASCADE' })
-    cv: Relation<CV>;
+    @ManyToOne(() => CV, (cv) => cv.languages)
+    @JoinColumn({ name: 'cv_id' })
+    cv?: Relation<CV>;
 }

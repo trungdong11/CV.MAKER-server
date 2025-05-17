@@ -3,11 +3,11 @@ import { IsString, IsBoolean, IsDateString, IsOptional, IsArray, IsEmail, IsNumb
 export class UpdatePersonalDetailsDto {
     @IsString()
     @IsOptional()
-    fullname?: string;
+    full_name?: string;
 
     @IsString()
     @IsOptional()
-    phoneNumber?: string;
+    phone_number?: string;
 
     @IsString()
     @IsOptional()
@@ -27,7 +27,7 @@ export class UpdatePersonalDetailsDto {
 
     @IsString()
     @IsOptional()
-    jobTitle?: string;
+    job_title?: string;
 }
 
 export class UpdateSocialDto {
@@ -51,15 +51,15 @@ export class UpdateEducationDto {
 
     @IsDateString()
     @IsOptional()
-    startDate?: string;
+    start_date?: string;
 
     @IsDateString()
     @IsOptional()
-    endDate?: string;
+    end_date?: string;
 
     @IsString()
     @IsOptional()
-    schoolLink?: string;
+    school_link?: string;
 
     @IsString()
     @IsOptional()
@@ -67,7 +67,7 @@ export class UpdateEducationDto {
 
     @IsNumber()
     @IsOptional()
-    GPA?: number;
+    gpa?: number;
 
     @IsString()
     @IsOptional()
@@ -77,19 +77,23 @@ export class UpdateEducationDto {
 export class UpdateAwardDto {
     @IsString()
     @IsOptional()
-    awardTitle?: string;
+    award_title?: string;
 
     @IsString()
     @IsOptional()
-    awardTitleLink?: string;
+    award_title_link?: string;
 
     @IsString()
     @IsOptional()
-    issuer?: string;
+    issued_by?: string;
+
+    @IsDateString()
+    @IsOptional()
+    issued_date?: string;
 
     @IsString()
     @IsOptional()
-    issuedDate?: string;
+    description?: string;
 }
 
 export class UpdateLanguageDto {
@@ -105,21 +109,21 @@ export class UpdateLanguageDto {
 export class UpdateSkillDto {
     @IsString()
     @IsOptional()
-    skillCategory?: string;
+    skill_category?: string;
 
     @IsString()
     @IsOptional()
-    listOfSkill?: string;
+    list_of_skill?: string;
 }
 
 export class UpdateWorkDto {
     @IsString()
     @IsOptional()
-    companyName?: string;
+    company_name?: string;
 
     @IsBoolean()
     @IsOptional()
-    isCurrentWorking?: boolean;
+    is_current_working?: boolean;
 
     @IsString()
     @IsOptional()
@@ -131,11 +135,11 @@ export class UpdateWorkDto {
 
     @IsDateString()
     @IsOptional()
-    startDate?: string;
+    start_date?: string;
 
     @IsDateString()
     @IsOptional()
-    endDate?: string;
+    end_date?: string;
 
     @IsString()
     @IsOptional()
@@ -145,19 +149,23 @@ export class UpdateWorkDto {
 export class UpdateProjectDto {
     @IsString()
     @IsOptional()
-    projectName?: string;
+    project_name?: string;
 
     @IsString()
     @IsOptional()
-    projectLink?: string;
+    project_link?: string;
 
     @IsDateString()
     @IsOptional()
-    startDate?: string;
+    start_date?: string;
 
     @IsDateString()
     @IsOptional()
-    endDate?: string;
+    end_date?: string;
+
+    @IsBoolean()
+    @IsOptional()
+    is_ongoing?: boolean;
 
     @IsString()
     @IsOptional()
@@ -167,23 +175,23 @@ export class UpdateProjectDto {
 export class UpdateCertificationDto {
     @IsString()
     @IsOptional()
-    certificationName?: string;
+    certification_name?: string;
 
     @IsString()
     @IsOptional()
-    issuingOrganization?: string;
+    issuing_organization?: string;
 
     @IsDateString()
     @IsOptional()
-    issuedDate?: string;
+    issued_date?: string;
 
     @IsString()
     @IsOptional()
-    certificationLink?: string;
+    certification_link?: string;
 
     @IsString()
     @IsOptional()
-    credentialId?: string;
+    credential_id?: string;
 }
 
 export class UpdatePublicationDto {
@@ -199,9 +207,9 @@ export class UpdatePublicationDto {
     @IsOptional()
     url?: string;
 
-    @IsString()
+    @IsDateString()
     @IsOptional()
-    publicationDate?: string;
+    publication_date?: string;
 
     @IsString()
     @IsOptional()
@@ -223,11 +231,11 @@ export class UpdateOrganizationDto {
 
     @IsDateString()
     @IsOptional()
-    startDate?: string;
+    start_date?: string;
 
     @IsDateString()
     @IsOptional()
-    endDate?: string;
+    end_date?: string;
 
     @IsString()
     @IsOptional()
@@ -235,20 +243,12 @@ export class UpdateOrganizationDto {
 }
 
 export class UpdateCvReqDto {
-    // @IsString()
-    // @IsOptional()
-    // lngCode?: string;
-
-    // @IsBoolean()
-    // @IsOptional()
-    // isPremium?: boolean;
-
     @IsString()
     @IsOptional()
     summary?: string;
 
     @IsOptional()
-    personalDetails?: UpdatePersonalDetailsDto;
+    personal_details?: UpdatePersonalDetailsDto;
 
     @IsArray()
     @IsOptional()

@@ -33,7 +33,7 @@ async function bootstrap() {
   app.useLogger(app.get(Logger));
 
   // Setup security headers
-  app.use(helmet());
+  // app.use(helmet());
 
   // For high-traffic websites in production, it is strongly recommended to offload compression from the application server - typically in a reverse proxy (e.g., Nginx). In that case, you should not use compression middleware.
   app.use(compression());

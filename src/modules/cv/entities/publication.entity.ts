@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, Relation } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Relation } from 'typeorm';
 import { CV } from './cv.entity';
 
 @Entity('publication')
@@ -15,12 +15,13 @@ export class Publication {
     @Column()
     url: string;
 
-    @Column()
-    publicationDate: Date;
+    @Column({ name: 'publication_date' })
+    publication_date: Date;
 
     @Column()
     description: string;
 
-    @ManyToOne(() => CV, (cv) => cv.publication, { onDelete: 'CASCADE' })
-    cv: Relation<CV>;
+    @ManyToOne(() => CV, (cv) => cv.publication)
+    @JoinColumn({ name: 'cv_id' })
+    cv?: Relation<CV>;
 }

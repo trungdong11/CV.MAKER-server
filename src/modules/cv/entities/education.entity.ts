@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, Relation } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Relation } from 'typeorm';
 import { CV } from './cv.entity';
 
 @Entity('education')
@@ -12,24 +12,25 @@ export class Education {
     @Column()
     school: string;
 
-    @Column()
-    startDate: Date;
+    @Column({ name: 'start_date' })
+    start_date: Date;
 
-    @Column()
-    endDate: Date;
+    @Column({ name: 'end_date' })
+    end_date: Date;
 
-    @Column()
-    schoolLink: string;
+    @Column({ name: 'school_link' })
+    school_link: string;
 
     @Column()
     city: string;
 
-    @Column('decimal')
-    GPA: number;
+    @Column({ name: 'gpa' })
+    gpa: number;
 
     @Column()
     description: string;
 
-    @ManyToOne(() => CV, (cv) => cv.education, { onDelete: 'CASCADE' })
-    cv: Relation<CV>;
+    @ManyToOne(() => CV, (cv) => cv.education)
+    @JoinColumn({ name: 'cv_id' })
+    cv?: Relation<CV>;
 }
