@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { CreateCvReqDto } from './dto/request/create-cv.req.dto';
 import { UpdateCvReqDto } from './dto/request/update-cv.req.dto';
-import { CvResDto } from './dto/response/cv.res.dto';
+import { CvResDto, CvResListDto } from './dto/response/cv.res.dto';
 import { CV } from './entities/cv.entity';
 import { CvRepository } from './repositories/cv.repository';
 import { Uuid } from '@common/types/common.type';
@@ -144,7 +144,7 @@ export class CvService {
     return this.mapToDto(decryptedCv);
   }
 
-  async findAll(userId: Uuid): Promise<CvResDto[]> {
+  async findAll(userId: Uuid): Promise<CvResListDto[]> {
     try {
       const cvs = await this.cvRepository.findAllByUserId(userId);
       const decryptedCvs = cvs.map(cv => this.decryptNestedObject(cv));
