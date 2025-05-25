@@ -6,7 +6,7 @@ import { PermissionGuard } from '@common/guards/permission.guard';
 import { Uuid } from '@common/types/common.type';
 import { CreateCvReqDto } from '../dto/request/create-cv.req.dto';
 import { UpdateCvReqDto } from '../dto/request/update-cv.req.dto';
-import { CvResDto } from '../dto/response/cv.res.dto';
+import { CvResDto, CvResListDto } from '../dto/response/cv.res.dto';
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CvService } from '../cv.service';
@@ -32,11 +32,11 @@ export class CvController {
 
   @ApiAuth({
     summary: 'Get all CVs',
-    type: CvResDto,
+    type: CvResListDto,
   })
-  @ApiResponse({ status: 200, type: [CvResDto], description: 'List of CVs retrieved successfully' })
+  @ApiResponse({ status: 200, type: [CvResListDto], description: 'List of CVs retrieved successfully' })
   @Get()
-  async findAll(@CurrentUser('id') userId: Uuid): Promise<CvResDto[]> {
+  async findAll(@CurrentUser('id') userId: Uuid): Promise<CvResListDto[]> {
     return this.cvService.findAll(userId);
   }
 

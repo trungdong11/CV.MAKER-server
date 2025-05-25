@@ -277,3 +277,21 @@ export class CvResDto {
     @Type(() => OrganizationResDto)
     organization: OrganizationResDto[];
 }
+
+export class CvResListDto {
+    @Expose()
+    id: string;
+
+    @Expose({ name: 'created_at' })
+    created_at: Date;
+
+    @Expose({ name: 'updated_at' })
+    updated_at: Date;
+
+    @Expose()
+    summary: string;
+
+    @Expose()
+    @Type(() => PersonalDetailsResDto)
+    personal_details: PersonalDetailsResDto;
+}
