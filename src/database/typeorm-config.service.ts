@@ -19,6 +19,10 @@ import { UserEntity } from '@modules/user/entities/user.entity';
 import { PermissionEntity } from '@modules/permission/entities/permission.entity';
 import { SessionEntity } from '@modules/session/entities/session.entity';
 import { RoleEntity } from '@modules/role/entities/role.entity';
+import { EvaluateEntity } from '@modules/evaluate/entities/evaluate.entity';
+import { EvaluateSection } from '@modules/evaluate/entities/evaluate-section.entity';
+import { GrammarError } from '@modules/evaluate/entities/grammar-error.entity';
+import { Suggestion } from '@modules/evaluate/entities/suggestion.entity';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -59,7 +63,11 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
         UserEntity,
         PermissionEntity,
         SessionEntity,
-        RoleEntity
+        RoleEntity,
+        EvaluateEntity,
+        EvaluateSection,
+        GrammarError,
+        Suggestion
       ],
       migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
       migrationsTableName: 'migrations',

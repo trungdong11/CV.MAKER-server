@@ -5,6 +5,7 @@ import { AbstractEntity } from '@database/entities/abstract.entity';
 import { PermissionEntity } from '@modules/permission/entities/permission.entity';
 import { RoleEntity } from '@modules/role/entities/role.entity';
 import { CV } from '@/modules/cv/entities/cv.entity';
+import { EvaluateEntity } from '@/modules/evaluate/entities/evaluate.entity';
 import { SessionEntity } from '@modules/session/entities/session.entity';
 import {
   BeforeInsert,
@@ -59,7 +60,9 @@ export class UserEntity extends AbstractEntity {
   @OneToMany(() => CV, (cv) => cv.user)
   cvs: CV[];
 
-
+  @OneToMany(() => EvaluateEntity, (evaluate) => evaluate.user)
+  evaluates: EvaluateEntity[];
+  
   @ManyToMany(() => RoleEntity, (role) => role.users)
   @JoinTable({
     name: 'user_role',

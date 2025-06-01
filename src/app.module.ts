@@ -11,6 +11,7 @@ import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import generateModulesSet from '@shared/modules-set';
 import { SharedModule } from '@shared/shared.module';
+import { EvaluateModule } from './modules/evaluate/evaluate.module';
 
 const modulesGenerate = generateModulesSet();
 
@@ -28,6 +29,7 @@ const modulesGenerate = generateModulesSet();
     FileModule,
     CvModule,
     GeminiModule,
+    EvaluateModule,
   ],
 })
 export class AppModule {}
