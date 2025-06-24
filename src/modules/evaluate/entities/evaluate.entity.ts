@@ -12,6 +12,9 @@ export class EvaluateEntity {
   @JoinColumn({ name: 'user_id' })
   user: Relation<UserEntity>;
 
+  @Column()
+  name_cv: string;
+
   @Column({ type: 'float' })
   total_content_score: number;
 

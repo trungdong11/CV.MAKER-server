@@ -75,6 +75,10 @@ class SectionDto {
 
 export class UpdateEvaluateDto {
   @ApiProperty()
+  @IsString()
+  name_cv?: string;
+
+  @ApiProperty()
   @IsNumber()
   @IsOptional()
   total_content_score?: number;

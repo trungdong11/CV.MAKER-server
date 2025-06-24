@@ -182,6 +182,7 @@ export class EvaluateService {
       }
 
       // Update main fields and updated_at
+      if (updateEvaluateDto.name_cv !== undefined) evaluate.name_cv = updateEvaluateDto.name_cv;
       if (updateEvaluateDto.total_content_score !== undefined) evaluate.total_content_score = updateEvaluateDto.total_content_score;
       if (updateEvaluateDto.total_final_score !== undefined) evaluate.total_final_score = updateEvaluateDto.total_final_score;
       if (updateEvaluateDto.content_score_100 !== undefined) evaluate.content_score_100 = updateEvaluateDto.content_score_100;
@@ -236,6 +237,7 @@ export class EvaluateService {
   private mapToDto(evaluate: EvaluateEntity): EvaluateResDto {
     return plainToClass(EvaluateResDto, {
       id: evaluate.id,
+      name_cv: evaluate.name_cv,
       total_content_score: evaluate.total_content_score,
       total_final_score: evaluate.total_final_score,
       content_score_100: evaluate.content_score_100,

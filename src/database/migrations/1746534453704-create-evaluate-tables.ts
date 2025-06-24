@@ -5,6 +5,7 @@ export class CreateEvaluateTables1746534453704 implements MigrationInterface {
         await queryRunner.query(`
             CREATE TABLE "evaluate" (
                 "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
+                "name_cv" character varying,
                 "created_at" TIMESTAMP NOT NULL DEFAULT now(),
                 "updated_at" TIMESTAMP NOT NULL DEFAULT now(),
                 "total_content_score" double precision NOT NULL,

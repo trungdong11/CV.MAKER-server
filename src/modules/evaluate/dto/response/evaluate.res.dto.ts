@@ -59,6 +59,9 @@ export class EvaluateResDto {
   id?: string;
 
   @ApiProperty()
+  name_cv?: string;
+
+  @ApiProperty()
   total_content_score?: number;
 
   @ApiProperty()
